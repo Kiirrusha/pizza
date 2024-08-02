@@ -5,11 +5,13 @@ import styles from "./Input.module.css";
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ isValid = true, ...props }, ref) => {
     return (
-      <input
-        ref={ref}
-        className={`${styles.input} ${isValid && styles.valid}`}
-        {...props}
-      />
+      <>
+        <input
+          ref={ref}
+          className={`${styles.input} ${isValid && styles.valid}`}
+          {...props}
+        />
+      </>
     );
   }
 );

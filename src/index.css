@@ -7,6 +7,25 @@
   --white-color: #fff;
   --seporator-color: #d4d6e0;
 }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+a {
+  text-decoration: none; /* Убираем подчеркивание */
+  color: inherit; /* Устанавливаем цвет текста в соответствии с родительским элементом */
+  font-family: inherit; /* Устанавливаем шрифт в соответствии с родительским элементом */
+  font-size: inherit; /* Устанавливаем размер шрифта в соответствии с родительским элементом */
+  font-weight: inherit; /* Устанавливаем начертание шрифта в соответствии с родительским элементом */
+  line-height: inherit; /* Устанавливаем межстрочный интервал в соответствии с родительским элементом */
+  background: none; /* Убираем фон */
+  border: none; /* Убираем границы */
+  padding: 0; /* Убираем отступы */
+  margin: 0;
+}
 
 .body {
   font-family: "Open Sans", sans-serif;

@@ -1,21 +1,33 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, defer } from "react-router-dom";
 import { Layout } from "../layout/Layout";
 import { Cart } from "../pages/Card/Cart";
 import { Product } from "../pages/Product/Product";
 import { PREFIX } from "../helpers/API";
 import axios from "axios";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
+import { Login } from "../pages/Login/Login";
+import { Register } from "../pages/Register/Register";
+import { AuthLayout } from "../layout/Auth/AuthLayout";
+import { RequireAuth } from "../helpers/RequireAuth";
 
 const Menu = lazy(() => import("../pages/Menu/Menu"));
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <RequireAuth>
+        <Layout />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "/",
-        element: <Menu />,
+        element: (
+          <Suspense fallback={<>...загрузка</>}>
+            <Menu />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
@@ -26,9 +38,26 @@ export const router = createBrowserRouter([
         element: <Product />,
         errorElement: <>Ошибка</>,
         loader: async ({ params }) => {
-          const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
-          return data;
+          return defer({
+            data: axios
+              .get(`${PREFIX}/products/${params.id}`)
+              .then((data) => data),
+          });
         },
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "registartion",
+        element: <Register />,
       },
     ],
   },

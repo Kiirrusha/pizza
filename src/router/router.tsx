@@ -9,6 +9,7 @@ import { Login } from "../pages/Login/Login";
 import { Register } from "../pages/Register/Register";
 import { AuthLayout } from "../layout/Auth/AuthLayout";
 import { RequireAuth } from "../helpers/RequireAuth";
+import { Success } from "../pages/Success/Success";
 
 const Menu = lazy(() => import("../pages/Menu/Menu"));
 
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/success",
+        element: <Success />,
       },
       {
         path: "/product/:id",
